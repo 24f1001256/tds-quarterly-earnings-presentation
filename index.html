@@ -2,150 +2,138 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quarterly Earnings — Reveal.js</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Reveal.js CDN -->
+  <!-- Reveal.js core CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/theme/black.css" id="theme">
 
-  <!-- Highlight.js for syntax highlighting -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+  <!-- KaTeX (for math) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
 
+  <!-- Highlight.js will be auto-loaded by Reveal's highlight plugin -->
   <style>
-    /* Small footer with contact */
-    .footer-contact {
-      position: fixed;
-      right: 12px;
-      bottom: 12px;
-      font-size: 0.85rem;
-      opacity: 0.8;
-    }
+    /* small styling tweak */
+    .email { font-weight: 600; color: #ffdd57; }
   </style>
 </head>
 <body>
+  <div class="reveal">
+    <div class="slides">
 
-<div class="reveal">
-  <div class="slides">
+      <!-- Title slide (regular HTML) -->
+      <section>
+        <h1>Quarterly Earnings Report</h1>
+        <h3>Technical Consultant — Presentation Demo</h3>
+        <p>Contact: <span class="email">24f1001256@ds.study.iitm.ac.in</span></p>
+        <aside class="notes">
+          Welcome stakeholders — quick 1 minute intro. Mention data sources and modeling assumptions.
+        </aside>
+      </section>
 
-    <!-- Title slide (HTML) -->
-    <section>
-      <h1>Quarterly Earnings Report<br><small>Contact: 24f1001256@ds.study.iitm.ac.in</small></h1>
-      <h3>Technical summary & highlights</h3>
-      <p class="muted">Prepared by: Technical Consulting — Major Financial Institution</p>
-      <p class="muted">Contact: <a href="mailto:24f1001256@ds.study.iitm.ac.in">24f1001256@ds.study.iitm.ac.in</a></p>
-      <aside class="notes">Introduce yourself, brief agenda: high-level results, KPIs, risk & outlook. Keep this slide short.</aside>
-    </section>
+      <!-- Markdown slide (requirement: at least one slide written in Markdown) -->
+      <section data-markdown>
+        <textarea data-template>
+## Highlights (Q3)
 
-    <!-- Markdown slide: demonstrate markdown parsing -->
-    <section data-markdown>
-      <script type="text/template">
+- Revenue grew **6.2%** vs prior quarter. <span class="fragment">Strong retail performance.</span>
+- Operating margin improved to **12.5%**. <span class="fragment">Cost controls and higher fee income.</span>
+- Net new accounts: **+14,300**. <span class="fragment">Digital onboarding improvements.</span>
 
-## Key Metrics (Markdown)
+> Analyst note: This slide is written in **Markdown** and uses *fragments* to reveal each point.
+        </textarea>
+        <aside class="notes">
+          Walk through each bullet — reveal them sequentially to focus attention.
+        </aside>
+      </section>
 
-- **Revenue (QoQ):** 8.2% ↑
-- **Net Interest Margin:** 3.45%
-- **Cost-to-Income Ratio:** 48%
+      <!-- Slide with animated fragments using HTML -->
+      <section>
+        <h2>Key Drivers</h2>
+        <ul>
+          <li class="fragment">Higher transactional volumes</li>
+          <li class="fragment">Lower credit provisioning</li>
+          <li class="fragment">FX tailwinds</li>
+        </ul>
+        <aside class="notes">
+          Each item will appear as you click. Use the first fragment to highlight top-line driver.
+        </aside>
+      </section>
 
-> Note: These are illustrative numbers for demo purposes.
-
-**Takeaway:** Focused cost control and stable NIM drove profitability.
-
-      </script>
-      <aside class="notes">Speak to the trends and how they compare to the prior quarter. Use this to anchor later slides.</aside>
-    </section>
-
-    <!-- Fragment slide: animated elements -->
-    <section>
-      <h2>Highlights (Animated)</h2>
-      <ul>
-        <li class="fragment">Strong deposit growth</li>
-        <li class="fragment">Loan book quality stable</li>
-        <li class="fragment">Digital channel adoption increased</li>
-      </ul>
-      <aside class="notes">Reveal each highlight one-by-one to keep attention.</aside>
-    </section>
-
-    <!-- Code sample slide with syntax highlighting -->
-    <section>
-      <h2>Example: KPI Calculation (Python)</h2>
-      <pre><code class="language-python"># rolling NIM calculation (illustrative)
+      <!-- Slide with code sample and syntax highlighting -->
+      <section>
+        <h2>Sample Data Pull (Python)</h2>
+<pre><code class="language-python">
+# sample: extract revenue by product
 import pandas as pd
-
-# sample dataframe
-# df should contain columns: 'interest_income', 'earning_assets'
-nim = (df['interest_income'].rolling(4).sum() / df['earning_assets'].rolling(4).mean()) * 100
-print(nim.tail())
+df = pd.read_csv("data/transactions.csv")
+rev_by_product = df.groupby("product")["amount"].sum().sort_values(ascending=False)
+print(rev_by_product.head())
 </code></pre>
-      <aside class="notes">Explain the rolling window approach and why we annualize / convert to percent.</aside>
-    </section>
+        <aside class="notes">
+          Explain that this is a simplified snippet; production code uses parameterized queries and secrets.
+        </aside>
+      </section>
 
-    <!-- Math slide: equations -->
-    <section>
-      <h2>Financial Formulae</h2>
-      <p>Net Interest Margin (NIM):</p>
-      <p>\(\mathrm{NIM} = \dfrac{\text{Interest Income} - \text{Interest Expense}}{\text{Average Earning Assets}} \times 100\)</p>
+      <!-- Slide with financial formulas (math) -->
+      <section>
+        <h2>Financial Formulas</h2>
+        <p>Net Present Value (NPV):</p>
+        <p>$$ \text{NPV} = \sum_{t=0}^{T} \frac{C_t}{(1+r)^t} $$</p>
+        <p>Compound Annual Growth Rate (CAGR):</p>
+        <p>$$ \text{CAGR} = \left(\frac{V_{end}}{V_{start}}\right)^{\frac{1}{n}} - 1 $$</p>
 
-      <p>Return on Equity (ROE):</p>
-      <p>\(\mathrm{ROE} = \dfrac{\text{Net Income}}{\text{Average Shareholders' Equity}} \times 100\)</p>
+        <aside class="notes">
+          Use the NPV formula to justify investment decisions; highlight discount rate choices.
+        </aside>
+      </section>
 
-      <aside class="notes">Walk through each symbol and how they map to accounting line items. Use a concrete example if audience asks.</aside>
-    </section>
+      <!-- Slide with small interactive fragment + markdown inside -->
+      <section data-markdown>
+        <textarea data-template>
+## Risk & Mitigants
 
-    <!-- Slide with fragmented chart placeholders (could embed real charts) -->
-    <section>
-      <h2>Quarterly Trend</h2>
-      <p class="fragment">Q1 — Revenue: 100</p>
-      <p class="fragment">Q2 — Revenue: 108</p>
-      <p class="fragment">Q3 — Revenue: 116</p>
-      <p class="fragment">Q4 — Revenue: 125</p>
-      <aside class="notes">If presenting live, replace with an embedded chart (png or SVG). Use fragments to reveal quarters sequentially.</aside>
-    </section>
+- Credit risk increase — *monitor LTV ratios*. <span class="fragment">Action: tighten underwriting.</span>
+- Market volatility — *hedge exposures*. <span class="fragment">Action: dynamic hedging program.</span>
+- Operational risk — *automation & testing*. <span class="fragment">Action: enhance controls.</span>
+        </textarea>
+        <aside class="notes">
+          Call out the top two risks and the proposed mitigants; ask for feedback.
+        </aside>
+      </section>
 
-    <!-- Closing slide -->
-    <section>
-      <h2>Questions</h2>
-      <p>Please contact <a href="mailto:24f1001256@ds.study.iitm.ac.in">24f1001256@ds.study.iitm.ac.in</a> for follow-ups.</p>
-      <aside class="notes">Open the floor. Have backup slides with deeper analytics ready.</aside>
-    </section>
+      <!-- Closing slide -->
+      <section>
+        <h2>Questions</h2>
+        <p>Contact: <span class="email">24f1001256@ds.study.iitm.ac.in</span></p>
+        <aside class="notes">
+          End with next steps and invite questions.
+        </aside>
+      </section>
 
+    </div>
   </div>
-</div>
 
-<!-- Reveal.js and plugins -->
-<script src="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/markdown/markdown.esm.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/highlight/highlight.esm.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/notes/notes.esm.js"></script>
+  <!-- Reveal.js core -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.js"></script>
 
-<!-- Highlight.js for language detection -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  <!-- Plugins: Markdown, Highlight, Math (KaTeX) -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/markdown/markdown.esm.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/highlight/highlight.esm.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/math/math.esm.js"></script>
 
-<!-- MathJax for equations -->
-<script>
-window.MathJax = {
-  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
-  svg: { fontCache: 'global' }
-};
-</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <!-- KaTeX for math rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
 
-<script>
-  Reveal.initialize({
-    hash: true,
-    plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ],
-    markdown: { smartypants: true },
-    slideNumber: true
-  });
-
-  // Initialize highlight.js for any code blocks outside of Reveal plugin
-  document.addEventListener('DOMContentLoaded', (event) => {
-    if(window.hljs) hljs.highlightAll();
-  });
-</script>
-
-<!-- Footer contact displayed always -->
-<div class="footer-contact">Contact: <a href="mailto:24f1001256@ds.study.iitm.ac.in">24f1001256@ds.study.iitm.ac.in</a></div>
+  <script>
+    // Initialize Reveal
+    Reveal.initialize({
+      hash: true,
+      slideNumber: true,
+      plugins: [ RevealMarkdown, RevealHighlight, RevealMath.KaTeX ]
+    });
+  </script>
 
 </body>
 </html>
